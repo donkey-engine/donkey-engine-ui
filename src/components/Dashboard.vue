@@ -25,6 +25,10 @@ export default {
     Footer,
     Navbar,
     ServerItem,
-  }
+  },
+
+  mounted() {
+    console.log(this.$http.get)
+  },
 }
 </script>
