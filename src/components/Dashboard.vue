@@ -15,20 +15,17 @@
   <Footer />
 </template>
 
-<script>
+<script lang='ts'>
+import { defineComponent } from 'vue'
 import Footer from '../blocks/Footer.vue'
 import Navbar from '../blocks/Navbar.vue'
 import ServerItem from './ServerItem.vue'
 
-export default {
+export default defineComponent({
   components: {
     Footer,
     Navbar,
     ServerItem,
   },
-
-  mounted() {
-    console.log(this.$http.get)
-  },
-}
+})
 </script>
