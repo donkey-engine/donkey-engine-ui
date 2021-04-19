@@ -1,0 +1,26 @@
+{
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "@vue/typescript",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
+    ],
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser"
+    },
+    "rules": {
+      "import/order": [
+        "warn",
+        {
+          "groups": ["builtin", "external", ["parent", "sibling"], "index"],
+          "newlines-between": "always"
+        }
+      ]
+    }
+}
