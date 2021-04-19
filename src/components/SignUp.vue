@@ -14,7 +14,7 @@
         </div>
       </section>
 
-      <form v-show="showForm" @submit="submitForm">
+      <form v-show="showForm" @submit.prevent="submitForm">
 
         <div v-show="showError" class="notification is-danger is-light">
           {{ errorText }}
@@ -55,13 +55,11 @@
   </section>
 </template>
 
-<script>
-import settings from '../settings.js'
+<script lang='ts'>
+import { defineComponent } from 'vue'
+import settings from '../settings'
 
-export default {
-  components: {
-    Navbar,
-  },
+export default defineComponent({
   data() {
     return {
       showForm: true,
@@ -77,9 +75,7 @@ export default {
     }
   },
   methods: {
-    submitForm(e) {
-      e.preventDefault()
-
+    submitForm() {
       this.showError = false
       this.errorText = ''
 
@@ -109,5 +105,5 @@ export default {
       })
     },
   },
-}
+})
 </script>
