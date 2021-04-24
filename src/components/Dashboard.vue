@@ -17,6 +17,7 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
+
 import Footer from '../blocks/Footer.vue'
 import Navbar from '../blocks/Navbar.vue'
 import ServerItem from './ServerItem.vue'

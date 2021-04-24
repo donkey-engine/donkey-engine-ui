@@ -57,6 +57,7 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
+
 import settings from '../settings'
 
 export default defineComponent({
