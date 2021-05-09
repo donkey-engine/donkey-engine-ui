@@ -2,8 +2,6 @@
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
   import axios from 'axios'
-  const component: DefineComponent<{}, {
-    $http: typeof axios;
-  }, any>
+  const component: DefineComponent<{}, {}, any>
   export default component
 }

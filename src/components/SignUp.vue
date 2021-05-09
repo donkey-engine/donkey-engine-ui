@@ -9,7 +9,7 @@
             Successfuly registered
           </p>
           <p class="subtitle">
-            Now you can <a href="/login">log in</a> into your account.
+            Now you can <a href="/login" @click.prevent="push('/login')">log in</a> into your account.
           </p>
         </div>
       </section>
@@ -58,8 +58,6 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
-import settings from '../settings'
-
 export default defineComponent({
   data() {
     return {
@@ -75,6 +73,7 @@ export default defineComponent({
       confirmPassword: null,
     }
   },
+  inject: ['push'],
   methods: {
     submitForm() {
       this.showError = false
@@ -85,7 +84,7 @@ export default defineComponent({
         this.errorText = 'Password and confirmation are not equal'
       }
 
-      this.$http.post(settings.API_BASE_URL + '/signup/', {
+      this.$http.post('/signup/', {
         username: this.username,
         password: this.password,
         email: this.email,
