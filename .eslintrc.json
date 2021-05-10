@@ -1,26 +1,32 @@
 {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended",
-      "@vue/typescript",
-      "plugin:import/errors",
-      "plugin:import/warnings",
-      "plugin:import/typescript"
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "@vue/typescript",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", ["parent", "sibling"], "index"],
+        "newlines-between": "always"
+      }
     ],
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser"
-    },
-    "rules": {
-      "import/order": [
-        "warn",
-        {
-          "groups": ["builtin", "external", ["parent", "sibling"], "index"],
-          "newlines-between": "always"
-        }
-      ]
-    }
+    "no-trailing-spaces": "warn",
+    "import/newline-after-import": ["warn", {"count": 1}],
+    "semi": ["warn", "never"],
+    "no-debugger": "warn",
+    "no-console": "warn",
+    "eol-last": ["warn", "always"]
+  }
 }

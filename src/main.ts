@@ -5,6 +5,9 @@ import Dashboard from './components/Dashboard.vue'
 import NotFound from './components/NotFound.vue'
 import Profile from './components/Profile.vue'
 import SignUp from './components/SignUp.vue'
+import SignIn from './components/SignIn.vue'
+import settings from './settings'
+import store from './store'
 
 import 'buefy/dist/buefy.css'
 
@@ -16,31 +19,61 @@ const routes: Routes = {
   '/dashboard': Dashboard,
   '/profile': Profile,
   '/signup': SignUp,
+  '/login': SignIn,
 }
 
+const publicRoutes = ['/signup', '/login']
+
 const SimpleRouter = defineComponent({
-  data: () => ({
-    currentRoute: window.location.pathname
-  }),
+  data() {
+    return {
+      currentRoute: window.location.pathname,
+    }
+  },
+
+  provide() {
+    return {
+      push: this.push,
+    }
+  },
 
   computed: {
     CurrentComponent(): Component {
+      if (!store.state.user && !publicRoutes.includes(this.currentRoute)) {
+        this.push('/login')
+      }
       return routes[this.currentRoute] || NotFound
+    }
+  },
+
+  created() {
+    const user = localStorage.getItem('user')
+    if (user) {
+      store.state.user = JSON.parse(user)
     }
   },
 
   render() {
     return h(this.CurrentComponent)
+  },
+
+  methods: {
+    push(pathname: string) {
+      window.history.pushState({}, '', pathname)
+      this.currentRoute = pathname
+    },
   }
 })
 
 
 const app = createApp(SimpleRouter)
+axios.defaults.baseURL = settings.API_BASE_URL
 app.config.globalProperties.$http = axios
 app.mount('#app')
 
 declare module "@vue/runtime-core" {
   export interface ComponentCustomProperties {
-    $http: typeof axios;
+    $http: typeof axios
+    push: (pathname: string) => void
   }
 }
