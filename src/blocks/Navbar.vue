@@ -18,9 +18,21 @@
           Dashboard
         </a>
 
-        <a href="/profile" class="navbar-item">
-          Profile
-        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{ username }}
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" @click="push('/profile')">
+              Profile
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" @click="signOut">
+              Sign Out
+            </a>
+          </div>
+        </div>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -57,3 +69,25 @@
     </div>
   </nav>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import store from '../store'
+
+export default defineComponent({
+  inject: ['push'],
+  computed: {
+    username() {
+      return store.state.user?.username
+    },
+  },
+  methods: {
+    signOut() {
+      localStorage.removeItem('user')
+      store.state.user = undefined
+      this.push('/login')
+    },
+  }
+})
+</script>

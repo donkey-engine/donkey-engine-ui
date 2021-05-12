@@ -39,7 +39,9 @@ const SimpleRouter = defineComponent({
 
   computed: {
     CurrentComponent(): Component {
-      if (!store.state.user && !publicRoutes.includes(this.currentRoute)) {
+      if (store.state.user && publicRoutes.includes(this.currentRoute)) {
+        this.push('/dashboard')
+      } else if (!store.state.user && !publicRoutes.includes(this.currentRoute)) {
         this.push('/login')
       }
       return routes[this.currentRoute] || NotFound
@@ -51,6 +53,12 @@ const SimpleRouter = defineComponent({
     if (user) {
       store.state.user = JSON.parse(user)
     }
+
+    window.addEventListener('popstate', this.onPopState)
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('popstate', this.onPopState)
   },
 
   render() {
@@ -61,6 +69,10 @@ const SimpleRouter = defineComponent({
     push(pathname: string) {
       window.history.pushState({}, '', pathname)
       this.currentRoute = pathname
+    },
+
+    onPopState() {
+      this.currentRoute = window.location.pathname
     },
   }
 })
