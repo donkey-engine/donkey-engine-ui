@@ -84,7 +84,7 @@ export default defineComponent({
         this.errorText = 'Password and confirmation are not equal'
       }
 
-      this.$http.post('/signup/', {
+      this.$http.post('/api/signup/', {
         username: this.username,
         password: this.password,
         email: this.email,

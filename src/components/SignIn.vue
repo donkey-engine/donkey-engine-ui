@@ -49,7 +49,7 @@ export default defineComponent({
       this.showError = false
       this.errorText = ''
 
-      this.$http.post('/auth/', {username: this.username, password: this.password}).then(response => {
+      this.$http.post('/api/auth/', {username: this.username, password: this.password}).then(response => {
         store.state.user = response.data
         localStorage.setItem('user', JSON.stringify(response.data))
         this.push('/dashboard')
