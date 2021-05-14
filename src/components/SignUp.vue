@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h1 class="title">Create new Donkey Engine account</h1>
-    <p>Are you already registered? <a href="/signup">Log in to your Donkey Engine account!</a></p>
+    <p>Are you already registered? <a href="/login">Log in to your Donkey Engine account!</a></p>
     <div class="container is-fluid box">
 
       <section v-show="showModal" class="hero">
