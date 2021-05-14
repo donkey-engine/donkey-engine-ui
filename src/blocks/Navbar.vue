@@ -83,7 +83,8 @@ export default defineComponent({
     },
   },
   methods: {
-    signOut() {
+    async signOut() {
+      await this.$http.get('/logout/')
       localStorage.removeItem('user')
       store.state.user = undefined
       this.push('/login')
