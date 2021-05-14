@@ -1,6 +1,7 @@
 <template>
   <section class="section">
     <h1 class="title">Sign in to Donkey Engine</h1>
+    <p>Don't have an account yet? <a href="/signup">Create new Donkey Engine account!</a></p>
     <div class="container is-fluid box">
       <form @submit.prevent="submitForm">
 
