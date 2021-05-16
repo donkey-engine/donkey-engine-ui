@@ -60,23 +60,35 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a href="#" class="button is-primary">
+            <a href="#" class="button is-primary" @click="showModal = true">
               <strong>Create server</strong>
             </a>
           </div>
         </div>
       </div>
     </div>
+
+    <server-modal
+      v-model:show="showModal"
+      @create-server="$emit('create-server', $event)"
+    />
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import ServerModal from '../components/ServerModal.vue'
 import store from '../store'
 
 export default defineComponent({
   inject: ['push'],
+  components: { ServerModal },
+  data() {
+    return {
+      showModal: false,
+    }
+  },
   computed: {
     username() {
       return store.state.user?.username
@@ -89,6 +101,6 @@ export default defineComponent({
       store.state.user = undefined
       this.push('/login')
     },
-  }
+  },
 })
 </script>
