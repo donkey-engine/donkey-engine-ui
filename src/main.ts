@@ -8,8 +8,9 @@ import SignUp from './components/SignUp.vue'
 import SignIn from './components/SignIn.vue'
 import settings from './settings'
 import store from './store'
+import { getCookie } from './utils'
 
-import 'buefy/dist/buefy.css'
+import 'bulma/css/bulma.css'
 
 interface Routes {
   [key: string]: Component,
@@ -80,6 +81,14 @@ const SimpleRouter = defineComponent({
 
 const app = createApp(SimpleRouter)
 axios.defaults.baseURL = settings.API_BASE_URL
+axios.interceptors.request.use(config => {
+  if (!config.method) return config
+  if (['post', 'put', 'patch', 'delete'].includes(config.method)) {
+    const token = getCookie('csrftoken')
+    config.headers[config.method]['X-CSRFToken'] = token
+  }
+  return config
+})
 app.config.globalProperties.$http = axios
 app.mount('#app')
 

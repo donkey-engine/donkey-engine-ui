@@ -1,15 +1,14 @@
 <template>
-  <Navbar />
+  <navbar @create-server="servers.push($event)" />
   <section class="section">
     <h1 class="title">Dashboard</h1>
       <div class="columns is-multiline is-variable is-1">
-
-      <ServerItem />
-      <ServerItem />
-      <ServerItem />
-      <ServerItem />
-      <ServerItem />
-
+        <server-item
+          v-for="(server, index) in servers"
+          :key="server.id"
+          :server="server"
+          @update-server="servers.splice(index, 1, $event)"
+        />
       </div>
   </section>
   <Footer />
@@ -27,6 +26,15 @@ export default defineComponent({
     Footer,
     Navbar,
     ServerItem,
+  },
+  data() {
+    return {
+      servers: [],
+    }
+  },
+  async created() {
+    const response = await this.$http.get('/servers/')
+    this.servers = response.data.results
   },
 })
 </script>

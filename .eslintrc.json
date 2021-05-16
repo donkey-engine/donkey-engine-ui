@@ -27,6 +27,7 @@
     "semi": ["warn", "never"],
     "no-debugger": "warn",
     "no-console": "warn",
-    "eol-last": ["warn", "always"]
+    "eol-last": ["warn", "always"],
+    "vue/no-unused-vars": "warn"
   }
 }
