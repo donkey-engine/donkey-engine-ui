@@ -11,6 +11,7 @@ import store from './store'
 import { getCookie } from './utils'
 
 import 'bulma/css/bulma.css'
+import './main.css'
 
 interface Routes {
   [key: string]: Component,
