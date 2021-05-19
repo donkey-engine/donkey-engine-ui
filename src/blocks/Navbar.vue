@@ -1,18 +1,25 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <img src="/logo.jpeg" width="28" height="28">
       </a>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <a
+        role="button"
+        class="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarBasicExample"
+        @click="isMenuActive = !isMenuActive"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navbarBasicExample" :class="['navbar-menu', {'is-active': isMenuActive}]">
       <div class="navbar-start">
         <a href="/dashboard" class="navbar-item">
           Dashboard
@@ -23,7 +30,7 @@
             {{ username }}
           </a>
 
-          <div class="navbar-dropdown">
+          <div class="navbar-dropdown is-boxed">
             <a class="navbar-item" @click="push('/profile')">
               Profile
             </a>
@@ -39,7 +46,7 @@
             More
           </a>
 
-          <div class="navbar-dropdown">
+          <div class="navbar-dropdown is-boxed">
             <a class="navbar-item">
               About
             </a>
@@ -87,6 +94,7 @@ export default defineComponent({
   data() {
     return {
       showModal: false,
+      isMenuActive: false,
     }
   },
   computed: {
