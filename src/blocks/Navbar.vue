@@ -2,7 +2,7 @@
   <nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <img src="/logo.jpeg" width="28" height="28">
+        <b>Donkey Engine</b>
       </a>
 
       <a
@@ -22,7 +22,7 @@
     <div id="navbarBasicExample" :class="['navbar-menu', {'is-active': isMenuActive}]">
       <div class="navbar-start">
         <a href="/dashboard" class="navbar-item">
-          Dashboard
+          Панель управления
         </a>
 
         <div class="navbar-item has-dropdown is-hoverable">
@@ -31,34 +31,20 @@
           </a>
 
           <div class="navbar-dropdown is-boxed">
-            <a class="navbar-item" @click="push('/profile')">
-              Profile
-            </a>
-            <hr class="navbar-divider">
             <a class="navbar-item" @click="signOut">
-              Sign Out
+              Выйти
             </a>
           </div>
         </div>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            More
+            Другое
           </a>
 
           <div class="navbar-dropdown is-boxed">
-            <a class="navbar-item">
-              About
-            </a>
-            <a class="navbar-item">
-              Jobs
-            </a>
-            <a class="navbar-item">
-              Contact
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item">
-              Report an issue
+            <a href="mailto:support@donkey-engine.host" class="navbar-item">
+              Служба поддержки
             </a>
           </div>
         </div>
@@ -68,7 +54,7 @@
         <div class="navbar-item">
           <div class="buttons">
             <a href="#" class="button is-primary" @click="showModal = true">
-              <strong>Create server</strong>
+              <strong>Создать сервер</strong>
             </a>
           </div>
         </div>

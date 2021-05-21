@@ -1,16 +1,16 @@
 <template>
   <section class="section">
-    <h1 class="title">Create new Donkey Engine account</h1>
-    <p>Are you already registered? <a href="/login" @click.prevent="push('/login')">Log in to your Donkey Engine account!</a></p>
+    <h1 class="title">Создать новый аккаунт в Donkey Engine</h1>
+    <p>Вы уже зарегистрированы? <a href="/login" @click.prevent="push('/login')">Войдите в свой аккаунт!</a></p>
     <div class="container is-fluid box">
 
       <section v-show="showModal" class="hero">
         <div class="hero-body">
           <p class="title">
-            Successfuly registered
+            Вы успешно зарегистрированы
           </p>
           <p class="subtitle">
-            Now you can <a href="/login" @click.prevent="push('/login')">log in</a> into your account.
+            Теперь вы можете <a href="/login" @click.prevent="push('/login')">войти</a> в свой аккаунт.
           </p>
         </div>
       </section>
@@ -23,34 +23,34 @@
 
 
         <div class="field">
-          <label class="label">Username</label>
+          <label class="label">Имя пользователя</label>
           <div class="control">
-            <input v-model="username" class="input" type="text" placeholder="Type your username here" required="required">
+            <input v-model="username" class="input" type="text" placeholder="По нему вы будете входить на сайт" required="required">
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Your email address</label>
+          <label class="label">Электронная почта</label>
           <div class="control">
-            <input v-model="email" class="input" type="email" placeholder="e.g. e@mail.com" required="required">
+            <input v-model="email" class="input" type="email" placeholder="напр. e@mail.com" required="required">
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Your password</label>
+          <label class="label">Пароль</label>
           <div class="control">
             <input v-model="password" class="input" type="password" placeholder="********" required="required">
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Confirm your password</label>
+          <label class="label">Подтверждение пароля</label>
           <div class="control">
             <input v-model="confirmPassword" class="input" type="password" placeholder="********" required="required">
           </div>
         </div>
 
-        <button class="button is-primary">Sign up</button>
+        <button class="button is-primary">Создать аккаунт</button>
       </form>
     </div>
   </section>
@@ -82,7 +82,7 @@ export default defineComponent({
 
       if (this.password !== this.confirmPassword) {
         this.showError = true
-        this.errorText = 'Password and confirmation are not equal'
+        this.errorText = 'Пароль и подтверждение не совпадают'
       }
 
       this.$http.post('/signup/', {
@@ -101,7 +101,7 @@ export default defineComponent({
             this.errorText += `${key}: ${error.response.data[key].join(';')}\n`
           }
         } else {
-          this.errorText = 'Unknown error. Please try again later.'
+          this.errorText = 'Неизвестная ошибка. Попробуйте еще раз через какое-то время'
         }
       })
     },

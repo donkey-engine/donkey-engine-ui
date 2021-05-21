@@ -1,7 +1,7 @@
 <template>
   <section class="section">
-    <h1 class="title">Sign in to Donkey Engine</h1>
-    <p>Don't have an account yet? <a href="/signup" @click.prevent="push('/signup')">Create new Donkey Engine account!</a></p>
+    <h1 class="title">Войти в Donkey Engine аккаунт</h1>
+    <p>У вас еще нет аккаунта? <a href="/signup" @click.prevent="push('/signup')">Тогда вам сюда!</a></p>
     <div class="container is-fluid box">
       <form @submit.prevent="submitForm">
 
@@ -10,20 +10,20 @@
         </div>
 
         <div class="field">
-          <label class="label">Username</label>
+          <label class="label">Имя пользователя</label>
           <div class="control">
-            <input v-model="username" class="input" type="text" placeholder="Type your username here" required="required">
+            <input v-model="username" class="input" type="text" placeholder="Введите свое имя пользователя" required="required">
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Password</label>
+          <label class="label">Пароль</label>
           <div class="control">
             <input v-model="password" class="input" type="password" placeholder="********" required="required">
           </div>
         </div>
 
-        <button class="button is-primary">Sign in</button>
+        <button class="button is-primary">Войти</button>
       </form>
     </div>
   </section>

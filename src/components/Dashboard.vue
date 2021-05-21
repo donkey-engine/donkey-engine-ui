@@ -1,7 +1,7 @@
 <template>
   <navbar @create-server="servers.push($event)" />
   <section class="section">
-    <h1 class="title">Dashboard</h1>
+    <h1 class="title">Панель управления</h1>
       <div class="columns is-multiline is-variable is-1">
         <server-item
           v-for="(server, index) in servers"
