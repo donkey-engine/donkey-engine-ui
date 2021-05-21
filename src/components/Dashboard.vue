@@ -31,7 +31,7 @@ export default defineComponent({
   },
   async created() {
     const response = await this.$http.get('/servers/')
-    this.servers = response.data.results
+    this.servers = response.data
   },
 })
 </script>

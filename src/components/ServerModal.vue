@@ -108,14 +108,14 @@ export default defineComponent({
     },
     async created() {
         const response = await this.$http.get('/games/')
-        this.games = response.data.results
+        this.games = response.data
     },
     watch: {
         async 'form.game_id'(val) {
             if (val) {
                 this.loading = true
                 const response = await this.$http.get(`/games/${val}/versions/`)
-                this.versions = response.data.results
+                this.versions = response.data
                 this.loading = false
             } else {
                 this.versions = []
