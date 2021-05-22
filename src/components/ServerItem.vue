@@ -2,7 +2,7 @@
   <div class="column is-4">
     <div class='box'>
       <div class="content">
-        <h1>{{ server.game.name }} server</h1>
+        <h1>Сервер {{ server.game.name }}</h1>
       </div>
       <span class="tag is-info is-light mb-2">{{ serverAddress }}</span>
       <div class="buttons">
@@ -41,18 +41,18 @@ export default defineComponent({
       switch (this.server.status) {
         case ServerStatus.CREATED:
           return {
-            text: 'Build',
+            text: 'Собрать',
             callback: (): Promise<void> => this.changeStatus('build', ServerStatus.BUILT)
           }
         case ServerStatus.BUILT:
         case ServerStatus.STOPPED:
           return {
-            text: 'Run',
+            text: 'Запустить',
             callback: (): Promise<void> => this.changeStatus('run', ServerStatus.RUNNING)
           }
         case ServerStatus.RUNNING:
           return {
-            text: 'Stop',
+            text: 'Остановить',
             callback: (): Promise<void> => this.changeStatus('stop', ServerStatus.STOPPED)
           }
         default:

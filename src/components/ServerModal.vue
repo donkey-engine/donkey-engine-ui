@@ -3,13 +3,13 @@
         <div class="modal-background" />
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Server creation</p>
+                <p class="modal-card-title">Создание сервера</p>
                 <button class="delete" @click="$emit('update:show', false)" />
             </header>
             <section class="modal-card-body">
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Game</label>
+                        <label class="label">Игра</label>
                     </div>
                     <div class="field-body is-flex-direction-column">
                         <div :class="['select is-fullwidth', {'is-danger': v$.form.game_id.$error}]">
@@ -25,14 +25,14 @@
                             </select>
                         </div>
                         <p :class="['help is-danger', {'is-invisible': !v$.form.game_id.$error}]">
-                            Choose a game
+                            Выберите игру
                         </p>
                     </div>
                 </div>
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Version</label>
+                        <label class="label">Версия</label>
                     </div>
                     <div class="field-body is-flex-direction-column">
                         <div
@@ -53,7 +53,7 @@
                             </select>
                         </div>
                         <p :class="['help is-danger', {'is-invisible': !v$.form.version_id.$error}]">
-                            Choose a version
+                            Выберите версию
                         </p>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         :class="['button is-success', {'is-loading': pending}]"
                         @click="createServer"
                     >
-                        Create
+                        Создать
                     </button>
                 </div>
             </section>
