@@ -39,6 +39,16 @@ const SimpleRouter = defineComponent({
     }
   },
 
+  errorCaptured(error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 403) {
+        localStorage.removeItem('user')
+        store.state.user = undefined
+        return false
+      }
+    }
+  },
+
   computed: {
     CurrentComponent(): Component {
       if (store.state.user && publicRoutes.includes(this.currentRoute)) {
