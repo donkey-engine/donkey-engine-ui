@@ -1,10 +1,50 @@
-<template>
+ <template>
   <div class="column is-4">
     <div class='box'>
       <div class="content">
-        <h1>Сервер {{ server.game.name }}</h1>
+        <div class="columns">
+          <div class="column is-three-quarters">
+            <div class="title">{{ server.name }}</div>
+          </div>
+          <div class="column">
+            <span :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">Игра</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p>{{ server.game.name }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">Версия</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p>{{ server.version.version }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <span class="tag is-info is-light mb-2">{{ serverAddress }}</span>
+      <div v-show="server.port" class="content">
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">Адрес</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control is-small">
+                <input class="input is-small" type="text" v-model="serverAddress" readonly>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="buttons">
         <button
           :class="['button is-primary', {'is-loading': pending}]"
@@ -57,6 +97,20 @@ export default defineComponent({
           }
         default:
           throw 'Unhandled status'
+      }
+    },
+    serverStatus() {
+      switch (this.server.status) {
+        case ServerStatus.RUNNING:
+          return {
+            text: 'Запущен',
+            color: 'is-success'
+          }
+        default:
+          return {
+            text: 'Остановлен',
+            color: 'is-danger',
+          }
       }
     },
     serverAddress(): string {
