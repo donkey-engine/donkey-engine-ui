@@ -2,7 +2,7 @@
   <navbar @create-server="servers.push($event)" />
   <section class="section">
     <h1 class="title">Панель управления</h1>
-      <div class="columns is-multiline is-variable is-1">
+      <div v-if="servers.length > 0" class="columns is-multiline is-variable is-1">
         <server-item
           v-for="(server, index) in servers"
           :key="server.id"
@@ -10,6 +10,7 @@
           @update-server="servers.splice(index, 1, $event)"
         />
       </div>
+      <div v-else class="content is-large">У вас еще нет серверов. Нажмите на кнопку "Создать сервер" в меню сверху</div>
   </section>
 </template>
 

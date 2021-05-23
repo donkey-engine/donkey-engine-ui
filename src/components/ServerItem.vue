@@ -100,17 +100,16 @@ export default defineComponent({
       }
     },
     serverStatus() {
-      switch (this.server.status) {
-        case ServerStatus.RUNNING:
-          return {
-            text: 'Запущен',
-            color: 'is-success'
-          }
-        default:
-          return {
-            text: 'Остановлен',
-            color: 'is-danger',
-          }
+      if (this.server.status === ServerStatus.RUNNING) {
+        return {
+          text: 'Запущен',
+          color: 'is-success'
+        }
+      } else {
+        return {
+          text: 'Остановлен',
+          color: 'is-danger',
+        }
       }
     },
     serverAddress(): string {
