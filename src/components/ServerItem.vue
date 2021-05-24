@@ -7,7 +7,7 @@
             <div class="title">{{ server.name }}</div>
           </div>
           <div class="column">
-            <span :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
+            <span style="width: 100%" :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
           </div>
         </div>
         <div class="field is-horizontal">
@@ -31,17 +31,15 @@
           </div>
         </div>
       </div>
-      <div v-show="server.port" class="content">
-        <div class="field is-horizontal">
-          <div class="field-label is-small">
-            <label class="label">Адрес</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <p class="control is-small">
-                <input class="input is-small" type="text" v-model="serverAddress" readonly>
-              </p>
-            </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-small">
+          <label class="label">Адрес</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control is-small">
+              <input class="input is-small" type="text" v-model="serverAddress" readonly>
+            </p>
           </div>
         </div>
       </div>
@@ -113,7 +111,11 @@ export default defineComponent({
       }
     },
     serverAddress(): string {
-      return `${settings.SERVER_HOST_URL}:${this.server.port}`
+      if (this.server.status === ServerStatus.RUNNING) {
+        return `${settings.SERVER_HOST_URL}:${this.server.port}`
+      } else {
+        return 'Сервер не запущенн'
+      }
     }
   },
   methods: {
