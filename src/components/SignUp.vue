@@ -10,8 +10,16 @@
             Вы успешно зарегистрированы
           </p>
           <p class="subtitle">
-            Теперь вы можете <a href="/login" @click.prevent="push('/login')">войти</a> в свой аккаунт.
+            На ваш почтовый ящик отправлено сообщение.<br>
+            Пожалуйста, перейдите по ссылке в этом сообщении для активации вашего профиля.<br>
           </p>
+          <p class="subtitle">
+            Не пришло письмо?<a @click.prevent="resendEmailConfirmation"> Отправить ещё раз</a>
+          </p>
+          <div>
+          </div>
+          <div>
+          </div>
         </div>
       </section>
 
@@ -105,6 +113,13 @@ export default defineComponent({
         }
       })
     },
+    resendEmailConfirmation() {
+      this.$http.get('/resend_email_confirmation/', {
+        params: {
+          username: this.username,
+        }
+      })
+    }
   },
 })
 </script>
