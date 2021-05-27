@@ -4,7 +4,7 @@
       <div class="content">
         <div class="columns">
           <div class="column is-three-quarters">
-            <div class="title">{{ server.name }}</div>
+            <div class="title">#{{ server.id }} {{ server.name }}</div>
           </div>
           <div class="column">
             <span style="width: 100%" :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
@@ -27,6 +27,20 @@
           <div class="field-body">
             <div class="field">
               <p>{{ server.version.version }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">Плагины</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="content">
+                <dl>
+                  <li v-for="mod in server.mods" :key="mod.id">{{ mod.name }}</li>
+                </dl>
+              </div>
             </div>
           </div>
         </div>
