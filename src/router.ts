@@ -4,7 +4,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from './components/Dashboard.vue'
 import SignUp from './components/SignUp.vue'
 import SignIn from './components/SignIn.vue'
-
 import store from './store'
 
 interface Routes {
