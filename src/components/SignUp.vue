@@ -24,29 +24,41 @@
 
         <div class="field">
           <label class="label">Имя пользователя</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="username" class="input" type="text" placeholder="По нему вы будете входить на сайт" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Электронная почта</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="email" class="input" type="email" placeholder="напр. e@mail.com" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-at"></i>
+            </span>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Пароль</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="password" class="input" type="password" placeholder="********" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Подтверждение пароля</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="confirmPassword" class="input" type="password" placeholder="********" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
           </div>
         </div>
 
