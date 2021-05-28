@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h1 class="title">Войти в Donkey Engine аккаунт</h1>
-    <p>У вас еще нет аккаунта? <a href="/signup" @click.prevent="push('/signup')">Тогда вам сюда!</a></p>
+    <p>У вас еще нет аккаунта? <router-link :to="{ path: '/signup' }">Тогда вам сюда!</router-link></p>
     <div class="container is-fluid box">
       <form @submit.prevent="submitForm">
 
@@ -44,7 +44,6 @@ export default defineComponent({
       errorText: '',
     }
   },
-  inject: ['push'],
   methods: {
     submitForm() {
       this.showError = false
@@ -53,7 +52,7 @@ export default defineComponent({
       this.$http.post('/auth/', {username: this.username, password: this.password}).then(response => {
         store.state.user = response.data
         localStorage.setItem('user', JSON.stringify(response.data))
-        this.push('/dashboard')
+        this.$router.push('/dashboard')
       }).catch(error => {
         this.showError = true
         if (error.response && error.response.data) {

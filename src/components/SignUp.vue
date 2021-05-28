@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h1 class="title">Создать новый аккаунт в Donkey Engine</h1>
-    <p>Вы уже зарегистрированы? <a href="/login" @click.prevent="push('/login')">Войдите в свой аккаунт!</a></p>
+    <p>Вы уже зарегистрированы? <router-link :to="{ path: '/login' }">Войдите в свой аккаунт!</router-link></p>
     <div class="container is-fluid box">
 
       <section v-show="showModal" class="hero">
@@ -10,7 +10,7 @@
             Вы успешно зарегистрированы
           </p>
           <p class="subtitle">
-            Теперь вы можете <a href="/login" @click.prevent="push('/login')">войти</a> в свой аккаунт.
+            Теперь вы можете <router-link :to="{ path: '/login' }">войти</router-link> в свой аккаунт.
           </p>
         </div>
       </section>
@@ -74,7 +74,6 @@ export default defineComponent({
       confirmPassword: null,
     }
   },
-  inject: ['push'],
   methods: {
     submitForm() {
       this.showError = false
