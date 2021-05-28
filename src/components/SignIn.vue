@@ -8,6 +8,15 @@
         <div v-show="showError" class="notification is-danger is-light">
           {{ errorText }}
         </div>
+        <div v-show="showEmailConfirm" class="notification is-danger is-light">
+          <p class="subtitle">
+            На ваш почтовый ящик отправлено сообщение.<br>
+            Пожалуйста, перейдите по ссылке в этом сообщении для активации вашего профиля.<br>
+          </p>
+          <p class="subtitle">
+            Не пришло письмо?<a @click.prevent="resendEmailConfirmation"> Отправить ещё раз</a>
+          </p>
+        </div>
 
         <div class="field">
           <label class="label">Имя пользователя</label>
@@ -47,6 +56,7 @@ export default defineComponent({
       password: '',
 
       showError: false,
+      showEmailConfirm: false,
       errorText: '',
     }
   },
@@ -62,11 +72,23 @@ export default defineComponent({
       }).catch(error => {
         this.showError = true
         if (error.response && error.response.data) {
+          if (error.response.data.error == 'User is inactive') {
+            this.showError = false
+            this.showEmailConfirm = true
+            return
+          }
           for (const key of Object.keys(error.response.data)) {
             this.errorText += `${key}: ${error.response.data[key].join(';')}\n`
           }
         } else {
           this.errorText = 'Unknown error. Please try again later.'
+        }
+      })
+    },
+    resendEmailConfirmation() {
+      this.$http.get('/resend_email_confirmation/', {
+        params: {
+          username: this.username,
         }
       })
     }
