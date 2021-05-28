@@ -13,7 +13,12 @@ const app = createApp({
   created() {
     const user = localStorage.getItem('user')
     if (user) {
-      store.state.user = JSON.parse(user)
+      try {
+        store.state.user = JSON.parse(user)
+      } catch (err) {
+        localStorage.removeItem('user')
+        store.state.user = undefined
+      }
     }
   }
 })
@@ -32,8 +37,9 @@ axios.interceptors.response.use(
     if (error.response?.status === 403) {
       localStorage.removeItem('user')
       store.state.user = undefined
+      return Promise.reject(error)
     }
-    return error
+    return Promise.reject(error)
   }
 )
 app.config.globalProperties.$http = axios

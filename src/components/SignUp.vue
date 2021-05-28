@@ -82,6 +82,7 @@ export default defineComponent({
       if (this.password !== this.confirmPassword) {
         this.showError = true
         this.errorText = 'Пароль и подтверждение не совпадают'
+        return false
       }
 
       this.$http.post('/signup/', {
