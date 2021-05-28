@@ -75,6 +75,7 @@ import ServerModal from '../components/ServerModal.vue'
 import store from '../store'
 
 export default defineComponent({
+  inject: ['push'],
   components: { ServerModal },
   data() {
     return {
@@ -92,7 +93,7 @@ export default defineComponent({
       await this.$http.get('/logout/')
       localStorage.removeItem('user')
       store.state.user = undefined
-      this.$router.push('/login')
+      this.push('/login')
     },
   },
 })
