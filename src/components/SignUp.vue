@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h1 class="title">Создать новый аккаунт в Donkey Engine</h1>
-    <p>Вы уже зарегистрированы? <a href="/login" @click.prevent="push('/login')">Войдите в свой аккаунт!</a></p>
+    <p>Вы уже зарегистрированы? <router-link :to="{ path: '/login' }">Войдите в свой аккаунт!</router-link></p>
     <div class="container is-fluid box">
 
       <section v-show="showModal" class="hero">
@@ -32,29 +32,41 @@
 
         <div class="field">
           <label class="label">Имя пользователя</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="username" class="input" type="text" placeholder="По нему вы будете входить на сайт" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Электронная почта</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="email" class="input" type="email" placeholder="напр. e@mail.com" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-at"></i>
+            </span>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Пароль</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="password" class="input" type="password" placeholder="********" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Подтверждение пароля</label>
-          <div class="control">
+          <div class="control has-icons-left has-icons-right">
             <input v-model="confirmPassword" class="input" type="password" placeholder="********" required="required">
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
           </div>
         </div>
 
@@ -82,7 +94,6 @@ export default defineComponent({
       confirmPassword: null,
     }
   },
-  inject: ['push'],
   methods: {
     submitForm() {
       this.showError = false
@@ -91,6 +102,7 @@ export default defineComponent({
       if (this.password !== this.confirmPassword) {
         this.showError = true
         this.errorText = 'Пароль и подтверждение не совпадают'
+        return false
       }
 
       this.$http.post('/signup/', {

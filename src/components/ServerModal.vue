@@ -58,6 +58,26 @@
                     </div>
                 </div>
 
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Плагины</label>
+                    </div>
+                    <div class="field-body">
+                        <ul>
+                        <li
+                            class="control"
+                            v-for="mod in mods"
+                            v-bind:key="mod.id"
+                        >
+                            <label class="checkbox">
+                            <input type="checkbox" :value="mod.id" v-model="form.mods">
+                            {{ mod.name }}
+                            </label>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="is-flex is-justify-content-flex-end">
                     <button
                         :class="['button is-success', {'is-loading': pending}]"
@@ -90,11 +110,13 @@ export default defineComponent({
         return {
             games: [],
             versions: [],
+            mods: [],
             loading: false,
             pending: false,
             form: {
                 game_id: null,
                 version_id: null,
+                mods: [],
             }
         }
     },
@@ -119,6 +141,17 @@ export default defineComponent({
                 this.loading = false
             } else {
                 this.versions = []
+                this.mods = []
+            }
+        },
+        async 'form.version_id'(val) {
+            if (val) {
+                this.loading = true
+                const response = await this.$http.get(`/games/${this.form.game_id}/versions/${val}/mods/`)
+                this.mods = response.data
+                this.loading = false
+            } else {
+                this.mods = []
             }
         },
     },
