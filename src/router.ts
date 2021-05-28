@@ -1,21 +1,13 @@
 import { Component } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import Dashboard from './components/Dashboard.vue'
 import SignUp from './components/SignUp.vue'
 import SignIn from './components/SignIn.vue'
 import store from './store'
 
-interface Routes {
-  path: string,
-  component: Component,
-  meta: {
-    requiresAuth: boolean
-    authRoute?: boolean
-  }
-}
 
-const routes: Routes[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/dashboard',
     component: Dashboard,

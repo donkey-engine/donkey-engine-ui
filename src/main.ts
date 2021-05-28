@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { createApp } from 'vue'
+import { createApp, h } from 'vue'
 
+import App from './App.vue'
 import settings from './settings'
 import store from './store'
 import { router } from './router'
@@ -20,6 +21,9 @@ const app = createApp({
         store.state.user = undefined
       }
     }
+  },
+  render() {
+    return h(App)
   }
 })
 axios.defaults.baseURL = settings.API_BASE_URL
