@@ -11,6 +11,9 @@
         />
       </div>
       <div v-else class="content is-large">У вас еще нет серверов. Нажмите на кнопку "Создать сервер" в меню сверху</div>
+    <div class="notification">
+      Если вы нашли какую-то ошибку на сайте или у вас есть предложение, что вы хотите видеть у нас, напишите пожалуйста нам на <a href="mailto:support@donkey-engine.host">почту</a>
+    </div>
   </section>
   <Footer />
 </template>
