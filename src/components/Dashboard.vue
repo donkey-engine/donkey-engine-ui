@@ -11,17 +11,23 @@
         />
       </div>
       <div v-else class="content is-large">У вас еще нет серверов. Нажмите на кнопку "Создать сервер" в меню сверху</div>
+    <div class="notification">
+      Если вы нашли какую-то ошибку на сайте или у вас есть предложение по функционалу, напишите пожалуйста нам на <a href="mailto:support@donkey-engine.host">почту</a>
+    </div>
   </section>
+  <Footer />
 </template>
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
+import Footer from '../blocks/Footer.vue'
 import Navbar from '../blocks/Navbar.vue'
 import ServerItem from './ServerItem.vue'
 
 export default defineComponent({
   components: {
+    Footer,
     Navbar,
     ServerItem,
   },
