@@ -71,7 +71,7 @@
                         >
                             <label class="checkbox">
                             <input type="checkbox" :value="mod.id" v-model="form.mods">
-                            {{ mod.name }}
+                            {{ mod.mod.name }} v{{ mod.name }}
                             </label>
                         </li>
                         </ul>
