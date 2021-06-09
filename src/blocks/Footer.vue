@@ -8,6 +8,7 @@
       <div class="column">
         <a href="https://vk.com/donkey_engine" target="_blank"><button class="button is-light"><i class="fab fa-vk fa-lg"></i></button></a>
         <a href="https://t.me/donkey_engine" target="_blank"><button class="button is-light"><i class="fab fa-telegram fa-lg"></i></button></a>
+        <a href="https://discord.gg/FnT4aTxpZR" target="_blank"><button class="button is-light"><i class="fab fa-discord fa-lg"></i></button></a>
       </div>
     </div>
   </footer>
