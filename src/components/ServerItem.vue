@@ -38,7 +38,7 @@
             <div class="field">
               <div class="content">
                 <dl>
-                  <li v-for="mod in server.mods" :key="mod.id">{{ mod.name }}</li>
+                  <li v-for="mod in server.mods" :key="mod.id">{{ mod.mod.name }} v{{ mod.name }}</li>
                 </dl>
               </div>
             </div>
