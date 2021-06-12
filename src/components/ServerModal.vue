@@ -158,6 +158,8 @@ export default defineComponent({
         this.versions = []
         this.mods = []
       }
+      this.form.version_id = null
+      this.form.mods = []
     },
     async "form.version_id"(val) {
       if (val) {
@@ -170,6 +172,7 @@ export default defineComponent({
       } else {
         this.mods = []
       }
+      this.form.mods = []
     },
   },
   methods: {
