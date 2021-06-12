@@ -79,7 +79,7 @@
           <input type="checkbox" :value="mod.id" v-model="form.mods" />
           <article class="media box">
             <figure class="media-left image is-64x64">
-              <img v-if="mod.icon" :src="mod.icon" :alt="mod.mod.name">
+              <img v-if="mod.mod.icon" :src="mod.mod.icon" :alt="mod.mod.name">
             </figure>
             <div class="media-content">
               <div class="content">
