@@ -1,10 +1,10 @@
 <template>
   <section class="hero is-large has-background-danger-light has-text-centered">
   <div class="hero-body">
-      <h1 class="title is-1">
+      <h1 class="title">
         404
       </h1>
-      <h2 class="subtitle is-3">
+      <h2 class="subtitle">
         Ой... Похоже, такой страницы не существует.
       </h2>
       <p class='has-text-danger'>
