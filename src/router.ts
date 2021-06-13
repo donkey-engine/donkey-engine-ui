@@ -2,6 +2,7 @@ import { Component } from 'vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import Dashboard from './components/Dashboard.vue'
+import NotFound from './components/NotFound.vue'
 import SignUp from './components/SignUp.vue'
 import SignIn from './components/SignIn.vue'
 import store from './store'
@@ -30,6 +31,14 @@ const routes: RouteRecordRaw[] = [
       requiresAuth: false,
       authRoute: true,
     },
+  },
+  { 
+    path: '/404',
+    component: NotFound,
+  },
+  { 
+    path: '/:pathMatch(.*)*',
+    redirect: '/404',
   },
 ]
 

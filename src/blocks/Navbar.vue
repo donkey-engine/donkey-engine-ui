@@ -21,11 +21,11 @@
 
     <div id="navbarBasicExample" :class="['navbar-menu', {'is-active': isMenuActive}]">
       <div class="navbar-start">
-        <a href="/dashboard" class="navbar-item">
+        <a v-if="username" @click="$router.push('/dashboard')" class="navbar-item">
           Панель управления
         </a>
 
-        <div class="navbar-item has-dropdown is-hoverable">
+        <div v-if="username" class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             {{ username }}
           </a>
@@ -39,7 +39,7 @@
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            Другое
+            Помощь
           </a>
 
           <div class="navbar-dropdown is-boxed">
@@ -52,16 +52,25 @@
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <div class="buttons">
+          <div v-if="username" class="buttons">
             <a href="#" class="button is-primary" @click="showModal = true">
               <strong>Создать сервер</strong>
             </a>
+          </div>
+          <div v-if="!username" class="buttons">
+            <a class="button is-primary" @click="$router.push('/signup')">
+                <strong>Регистрация</strong>
+              </a>
+              <a class="button" @click="$router.push('/login')">
+                Вход
+              </a>
           </div>
         </div>
       </div>
     </div>
 
     <server-modal
+      v-if="username"
       v-model:show="showModal"
       @create-server="$emit('create-server', $event)"
     />
