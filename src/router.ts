@@ -32,11 +32,11 @@ const routes: RouteRecordRaw[] = [
       authRoute: true,
     },
   },
-  { 
+  {
     path: '/404',
     component: NotFound,
   },
-  { 
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/404',
   },
