@@ -30,7 +30,7 @@ export default defineComponent({
     }
   },
   computed: {
-    currentIcon() {
+    currentIcon(): String {
       return this.icons[this.iconIndex]
     }
   },
