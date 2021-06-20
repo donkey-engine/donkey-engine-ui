@@ -1,5 +1,5 @@
 <template>
-  <navbar @create-server="servers.push($event)" />
+  <navbar/>
   <router-view/>
   <Footer />
 </template>

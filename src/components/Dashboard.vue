@@ -19,20 +19,24 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
+import store from '../store'
 import ServerItem from './ServerItem.vue'
 
 export default defineComponent({
   components: {
     ServerItem,
   },
-  data() {
-    return {
-      servers: [],
+  computed: {
+    servers() {
+      return store.state.servers
     }
   },
   async created() {
     const response = await this.$http.get('/servers/')
-    this.servers = response.data
+    store.commit({
+      type: 'setServers',
+      servers: response.data,
+    })
   },
 })
 </script>

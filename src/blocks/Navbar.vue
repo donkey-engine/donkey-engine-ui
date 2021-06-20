@@ -72,7 +72,6 @@
     <server-modal
       v-if="username"
       v-model:show="showModal"
-      @create-server="$emit('create-server', $event)"
     />
   </nav>
 </template>
@@ -100,7 +99,7 @@ export default defineComponent({
     async signOut() {
       await this.$http.get('/logout/')
       localStorage.removeItem('user')
-      store.state.user = undefined
+      store.commit('removeUser')
       this.$router.push('/login')
     },
   },

@@ -15,10 +15,13 @@ const app = createApp({
     const user = localStorage.getItem('user')
     if (user) {
       try {
-        store.state.user = JSON.parse(user)
+        store.commit({
+          type: 'setUser',
+          user: JSON.parse(user)
+        })
       } catch (err) {
         localStorage.removeItem('user')
-        store.state.user = undefined
+        store.commit('removeUser')
       }
     }
   },
@@ -40,7 +43,7 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response?.status === 403) {
       localStorage.removeItem('user')
-      store.state.user = undefined
+      store.commit('removeUser')
       return Promise.reject(error)
     }
     return Promise.reject(error)
@@ -48,6 +51,7 @@ axios.interceptors.response.use(
 )
 app.config.globalProperties.$http = axios
 app.use(router)
+app.use(store)
 app.mount('#app')
 
 declare module "@vue/runtime-core" {
