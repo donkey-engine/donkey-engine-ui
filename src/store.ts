@@ -1,16 +1,32 @@
-import { reactive } from 'vue'
+import { createStore } from 'vuex'
+import { Server } from './interfaces'
 
-export interface User {
+interface User {
     id: number,
     username: string,
 }
 
 interface State {
     user?: User,
+    servers: Server[],
 }
 
-export default {
-    state: reactive({
-        user: undefined,
-    }) as State,
-}
+export default createStore({
+  state(): State {
+    return {
+      user: undefined,
+      servers: [],
+    }
+  },
+  mutations: {
+    setUser(state: State, payload) {
+      state.user = payload.user
+    },
+    removeUser(state: State) {
+      state.user = undefined
+    },
+    setServers(state: State, payload) {
+      state.servers = payload.servers
+    }
+  }
+})

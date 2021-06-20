@@ -128,7 +128,7 @@ export default defineComponent({
       if (this.server.status === ServerStatus.RUNNING) {
         return `${settings.SERVER_HOST_URL}:${this.server.port}`
       } else {
-        return 'Сервер не запущенн'
+        return 'Сервер не запущен'
       }
     }
   },

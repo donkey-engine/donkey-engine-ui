@@ -111,6 +111,8 @@ import { defineComponent } from "vue"
 import { useVuelidate } from "@vuelidate/core"
 import { required } from "@vuelidate/validators"
 
+import store from '../store'
+
 export default defineComponent({
   setup() {
     return { v$: useVuelidate() }
@@ -183,7 +185,7 @@ export default defineComponent({
       const { data } = await this.$http.post("/servers/", this.form)
       await this.$http.post(`/servers/${data.id}/build/`)
       this.pending = false
-      this.$emit("create-server", data)
+      store.state.servers.push(data)
       this.$emit("update:show", false)
     },
   },
