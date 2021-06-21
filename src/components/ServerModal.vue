@@ -107,9 +107,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
-import { useVuelidate } from "@vuelidate/core"
-import { required } from "@vuelidate/validators"
+import { defineComponent } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
 
 import store from '../store'
 
@@ -146,11 +146,11 @@ export default defineComponent({
     }
   },
   async created() {
-    const response = await this.$http.get("/games/")
+    const response = await this.$http.get('/games/')
     this.games = response.data
   },
   watch: {
-    async "form.game_id"(val) {
+    async 'form.game_id'(val) {
       if (val) {
         this.loading = true
         const response = await this.$http.get(`/games/${val}/versions/`)
@@ -163,7 +163,7 @@ export default defineComponent({
       this.form.version_id = null
       this.form.mods = []
     },
-    async "form.version_id"(val) {
+    async 'form.version_id'(val) {
       if (val) {
         this.loading = true
         const response = await this.$http.get(
@@ -182,11 +182,11 @@ export default defineComponent({
       this.v$.$touch()
       if (this.v$.$error) return
       this.pending = true
-      const { data } = await this.$http.post("/servers/", this.form)
+      const { data } = await this.$http.post('/servers/', this.form)
       await this.$http.post(`/servers/${data.id}/build/`)
       this.pending = false
       store.state.servers.push(data)
-      this.$emit("update:show", false)
+      this.$emit('update:show', false)
     },
   },
 })

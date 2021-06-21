@@ -4,7 +4,12 @@
       <div class="content">
         <div class="columns">
           <div class="column is-three-quarters">
-            <div class="title">#{{ server.id }} {{ server.name }}</div>
+            <router-link
+              :to="{ name: 'server', params: { id: server.id } }"
+              class="title has-text-link"
+            >
+              #{{ server.id }} {{ server.name }}
+            </router-link>
           </div>
           <div class="column">
             <span style="width: 100%" :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>

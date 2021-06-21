@@ -18,6 +18,7 @@ export enum ServerStatus {
 
 export interface Server {
   id: number
+  name: string
   game: Game
   version: GameVersion
   status: ServerStatus

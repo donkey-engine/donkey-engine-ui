@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard.vue'
 import NotFound from './components/NotFound.vue'
 import SignUp from './components/SignUp.vue'
 import SignIn from './components/SignIn.vue'
+import ServerPage from './components/ServerPage.vue'
 import store from './store'
 
 
@@ -40,6 +41,14 @@ const routes: RouteRecordRaw[] = [
     path: '/:pathMatch(.*)*',
     redirect: '/404',
   },
+  {
+    path: '/server/:id',
+    name: 'server',
+    component: ServerPage,
+    meta: {
+      requiresAuth: true,
+    },
+  }
 ]
 
 export const router = createRouter({
