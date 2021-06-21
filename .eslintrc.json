@@ -15,6 +15,7 @@
     "parser": "@typescript-eslint/parser"
   },
   "rules": {
+    "quotes": ["warn", "single"],
     "import/order": [
       "warn",
       {

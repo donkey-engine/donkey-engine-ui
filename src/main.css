@@ -1,3 +1,7 @@
 .is-primary {
-    background-color: #714dd2 !important;
+  background-color: #714dd2 !important;
+}
+
+.section {
+  padding: 1.5rem;
 }

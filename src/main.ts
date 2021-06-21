@@ -54,7 +54,7 @@ app.use(router)
 app.use(store)
 app.mount('#app')
 
-declare module "@vue/runtime-core" {
+declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
     $http: typeof axios
     push: (pathname: string) => void

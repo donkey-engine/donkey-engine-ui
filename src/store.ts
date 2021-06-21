@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+
 import { Server } from './interfaces'
 
 interface User {
