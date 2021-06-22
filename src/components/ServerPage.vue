@@ -10,6 +10,7 @@
             @rename="server = $event"
           />
         </div>
+        <ServerConfigs :serverData="server" />
         <div class="field">
           <label class="label">Игра</label>
           {{ server.game.name }}
@@ -44,10 +45,11 @@ import { defineComponent } from 'vue'
 
 import ServerRenameForm from './ServerRenameForm.vue'
 import { Server, ServerStatus } from '../interfaces'
+import ServerConfigs from './ServerConfigs.vue'
 import settings from '../settings'
 
 export default defineComponent({
-  components: { ServerRenameForm },
+  components: { ServerRenameForm, ServerConfigs },
   data() {
     return {
       server: null as null | Server,
