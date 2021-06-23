@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 
-import { Server, ServerConfig } from './interfaces'
+import { Server } from './interfaces'
 
 interface User {
     id: number,
