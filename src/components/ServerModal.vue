@@ -101,6 +101,8 @@
           </article>
         </label>
 
+        <div v-if="commonError" class="help is-danger">{{ commonError }}</div>
+
         <div class="is-flex is-justify-content-flex-end">
           <button
             :class="['button is-success', { 'is-loading': pending }]"
@@ -136,6 +138,7 @@ export default defineComponent({
   },
   data() {
     return {
+      commonError: '',
       games: [],
       versions: [],
       mods: [],
@@ -194,11 +197,14 @@ export default defineComponent({
       this.v$.$touch()
       if (this.v$.$error) return
       this.pending = true
-      const { data } = await this.$http.post('/servers/', this.form)
-      await this.$http.post(`/servers/${data.id}/build/`)
+      try {
+        const { data } = await this.$http.post('/servers/', this.form)
+        store.state.servers.push(data)
+        this.$emit('update:show', false)
+      } catch (err) {
+        this.commonError = Object.values(err.response.data).join(' ')
+      }
       this.pending = false
-      store.state.servers.push(data)
-      this.$emit('update:show', false)
     },
     updateConfig(config: ServerConfig) {
       this.form.config = config
