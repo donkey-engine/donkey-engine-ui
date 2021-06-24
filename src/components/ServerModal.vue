@@ -51,7 +51,6 @@
           ]"
         >
           <strong>Выберите версию</strong>
-          <br />
           <label v-for="version in versions" :key="version.id" class="is-clickable">
             <input :value="version.id" v-model="form.version_id" type="radio">
             <article class="media box">
@@ -74,6 +73,15 @@
           Выберите версию
         </p>
 
+        <strong>Выберите конфигурацию</strong>
+        <ServerConfigs
+          :key="form.game_id"
+          v-if="form.game_id"
+          :gameID="form.game_id"
+          @updatedconfig="updateConfig"
+        />
+        <br /><br />
+
         <strong>Выберите моды</strong>
         <label v-for="mod in mods" :key="mod.id" class="is-clickable">
           <input type="checkbox" :value="mod.id" v-model="form.mods" />
@@ -93,6 +101,8 @@
           </article>
         </label>
 
+        <div v-if="commonError" class="help is-danger">{{ commonError }}</div>
+
         <div class="is-flex is-justify-content-flex-end">
           <button
             :class="['button is-success', { 'is-loading': pending }]"
@@ -107,13 +117,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
-
+import { defineComponent } from 'vue'
+import { ServerConfig } from '../interfaces'
 import store from '../store'
+import ServerConfigs from './ServerConfigs.vue'
+
 
 export default defineComponent({
+  components: { ServerConfigs },
   setup() {
     return { v$: useVuelidate() }
   },
@@ -125,6 +138,7 @@ export default defineComponent({
   },
   data() {
     return {
+      commonError: '',
       games: [],
       versions: [],
       mods: [],
@@ -134,6 +148,7 @@ export default defineComponent({
         game_id: null,
         version_id: null,
         mods: [],
+        config: {},
       },
     }
   },
@@ -182,12 +197,18 @@ export default defineComponent({
       this.v$.$touch()
       if (this.v$.$error) return
       this.pending = true
-      const { data } = await this.$http.post('/servers/', this.form)
-      await this.$http.post(`/servers/${data.id}/build/`)
+      try {
+        const { data } = await this.$http.post('/servers/', this.form)
+        store.state.servers.push(data)
+        this.$emit('update:show', false)
+      } catch (err) {
+        this.commonError = Object.values(err.response.data).join(' ')
+      }
       this.pending = false
-      store.state.servers.push(data)
-      this.$emit('update:show', false)
     },
+    updateConfig(config: ServerConfig) {
+      this.form.config = config
+    }
   },
 })
 </script>

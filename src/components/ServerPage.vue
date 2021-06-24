@@ -26,6 +26,11 @@
           <label class="label">Статус</label>
           <span :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
         </div>
+        <p class="subtitle">Конфигурация</p>
+        <div class="field" v-for="(field, name) in server.config" :key="name">
+          <label class="label">{{ name }}</label>
+          {{ field }}
+        </div>
         <!-- <div class="field">
           <button class="button is-danger is-outlined">
             <span class="icon">
@@ -41,10 +46,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
-import ServerRenameForm from './ServerRenameForm.vue'
 import { Server, ServerStatus } from '../interfaces'
 import settings from '../settings'
+import ServerRenameForm from './ServerRenameForm.vue'
+
 
 export default defineComponent({
   components: { ServerRenameForm },
@@ -76,8 +81,12 @@ export default defineComponent({
     },
   },
   async created() {
-    const { data } = await this.$http.get(`/servers/${this.$route.params.id}/`)
-    this.server = data
+    try {
+      const { data } = await this.$http.get(`/servers/${this.$route.params.id}/`)
+      this.server = data
+    } catch {
+      this.$router.push('/404')
+    }
   },
 })
 </script>
