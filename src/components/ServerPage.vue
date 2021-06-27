@@ -1,45 +1,50 @@
 <template>
   <section class="section">
-    <div>
-      <template v-if="server">
-        <div class="field">
-          <label class="label">Название</label>
-          <server-rename-form
-            class="control"
-            :server="server"
-            @rename="server = $event"
-          />
-        </div>
-        <div class="field">
-          <label class="label">Игра</label>
-          {{ server.game.name }}
-        </div>
-        <div class="field">
-          <label class="label">Версия</label>
-          {{ server.version.version }}
-        </div>
-        <div class="field">
-          <label class="label">Адрес</label>
-          {{ serverAddress }}
-        </div>
-        <div class="field">
-          <label class="label">Статус</label>
-          <span :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
-        </div>
-        <p class="subtitle">Конфигурация</p>
-        <div class="field" v-for="(field, name) in server.config" :key="name">
-          <label class="label">{{ name }}</label>
-          {{ field }}
-        </div>
-        <!-- <div class="field">
-          <button class="button is-danger is-outlined">
-            <span class="icon">
-              <i class="fas fa-trash-alt" />
-            </span>
-            <span>Удалить</span>
-          </button>
-        </div> -->
-      </template>
+    <div class="columns">
+      <div class="column">
+        <template v-if="server">
+          <div class="field">
+            <label class="label">Название</label>
+            <server-rename-form
+              class="control"
+              :server="server"
+              @rename="server = $event"
+            />
+          </div>
+          <div class="field">
+            <label class="label">Игра</label>
+            {{ server.game.name }}
+          </div>
+          <div class="field">
+            <label class="label">Версия</label>
+            {{ server.version.version }}
+          </div>
+          <div class="field">
+            <label class="label">Адрес</label>
+            {{ serverAddress }}
+          </div>
+          <div class="field">
+            <label class="label">Статус</label>
+            <span :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
+          </div>
+          <p class="subtitle">Конфигурация</p>
+          <div class="field" v-for="(field, name) in server.config" :key="name">
+            <label class="label">{{ name }}</label>
+            {{ field }}
+          </div>
+          <!-- <div class="field">
+            <button class="button is-danger is-outlined">
+              <span class="icon">
+                <i class="fas fa-trash-alt" />
+              </span>
+              <span>Удалить</span>
+            </button>
+          </div> -->
+        </template>
+      </div>
+      <div class="column">
+        <ServerLogs v-if="['RUNNING', 'STOPPED'].includes(server?.status)" />
+      </div>
     </div>
   </section>
 </template>
@@ -48,11 +53,12 @@
 import { defineComponent } from 'vue'
 import { Server, ServerStatus } from '../interfaces'
 import settings from '../settings'
+import ServerLogs from './ServerLogs.vue'
 import ServerRenameForm from './ServerRenameForm.vue'
 
 
 export default defineComponent({
-  components: { ServerRenameForm },
+  components: { ServerLogs, ServerRenameForm },
   data() {
     return {
       server: null as null | Server,
