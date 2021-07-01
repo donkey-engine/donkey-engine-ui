@@ -19,7 +19,7 @@
 <script lang='ts'>
 import { defineComponent, PropType } from 'vue'
 
-import { Server } from '../interfaces'
+import { Server } from '../../interfaces'
 
 export default defineComponent({
   props: {

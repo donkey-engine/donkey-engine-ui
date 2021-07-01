@@ -46,6 +46,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { GameConfig, ServerConfig } from '../interfaces'
 
 interface DataType {
@@ -73,8 +74,8 @@ export default defineComponent({
     },
   },
   async created() {
-    const { data } = await this.$http.get(`/games/${this.gameID}/config`);
-    this.rules = data;
+    const { data } = await this.$http.get(`/games/${this.gameID}/config`)
+    this.rules = data
 
     for (const [key, field] of Object.entries(this.rules)) {
       this.config[key] = field.config.default
