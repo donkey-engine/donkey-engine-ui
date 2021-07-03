@@ -47,6 +47,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import { getClient } from '../websocket'
 import store from '../store'
 
 export default defineComponent({
@@ -68,6 +69,7 @@ export default defineComponent({
       this.$http.post('/auth/', {username: this.username, password: this.password}).then(response => {
         store.state.user = response.data
         localStorage.setItem('user', JSON.stringify(response.data))
+        getClient().init()
         this.$router.push('/dashboard')
       }).catch(error => {
         this.showError = true
