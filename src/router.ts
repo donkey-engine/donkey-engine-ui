@@ -1,11 +1,10 @@
-import { Component } from 'vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-import Dashboard from './components/Dashboard.vue'
-import NotFound from './components/NotFound.vue'
-import SignUp from './components/SignUp.vue'
-import SignIn from './components/SignIn.vue'
-import ServerPage from './components/ServerPage.vue'
+import Dashboard from './pages/Dashboard/index.vue'
+import NotFound from './pages/NotFound.vue'
+import SignUp from './pages/SignUp.vue'
+import SignIn from './pages/SignIn.vue'
+import ServerPage from './pages/Server/index.vue'
 import store from './store'
 
 

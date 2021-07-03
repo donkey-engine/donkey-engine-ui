@@ -19,7 +19,7 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
-import store from '../store'
+import store from '../../store'
 import ServerItem from './ServerItem.vue'
 
 export default defineComponent({
