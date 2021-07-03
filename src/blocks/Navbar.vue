@@ -81,6 +81,7 @@ import { defineComponent } from 'vue'
 
 import ServerModal from '../components/ServerModal.vue'
 import store from '../store'
+import { getClient, getClient } from '../websocket'
 
 export default defineComponent({
   components: { ServerModal },
@@ -101,6 +102,7 @@ export default defineComponent({
       localStorage.removeItem('user')
       store.commit('removeUser')
       this.$router.push('/login')
+      getClient().deactivate()
     },
   },
 })

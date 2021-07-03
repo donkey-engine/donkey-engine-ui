@@ -7,6 +7,8 @@ export interface WebSocketInterface {
   connection?: WebSocket
   /** Initialize WebSocket connection */
   init(): void
+  /** Stop WebSocket connection */
+  deactivate(): void
 }
 
 class Client implements WebSocketInterface {
@@ -30,6 +32,11 @@ class Client implements WebSocketInterface {
     this.connection.onopen = (_event) => {
       setInterval(() => this.ping(), 10000)
     }
+  }
+
+  public deactivate() {
+    this.connection?.close()
+    this.initialized = false
   }
 
   private buildURL(): string {
