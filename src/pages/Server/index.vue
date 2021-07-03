@@ -49,10 +49,11 @@
   </section>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { defineComponent } from 'vue'
-import { Server, ServerStatus } from '../interfaces'
-import settings from '../settings'
+
+import { Server, ServerStatus } from '../../interfaces'
+import settings from '../../settings'
 import ServerLogs from './ServerLogs.vue'
 import ServerRenameForm from './ServerRenameForm.vue'
 
