@@ -139,16 +139,17 @@ export default defineComponent({
   },
   methods: {
     async changeStatus(action: string, expectedStatus: ServerStatus) {
-      this.pending = true
+      console.log(action, expectedStatus)
+      // this.pending = true
       await this.$http.post(`/servers/${this.server.id}/${action}/`)
-      while (this.server.status !== expectedStatus) {
-        await new Promise(resolve => setTimeout(async () => {
-          const { data: server } = await this.$http.get(`/servers/${this.server.id}/`)
-          this.$emit('update-server', server)
-          resolve(true)
-        }, 100))
-      }
-      this.pending = false
+      // while (this.server.status !== expectedStatus) {
+      //   await new Promise(resolve => setTimeout(async () => {
+      //     if (this.server.status !== expectedStatus) {
+      //       resolve(true)
+      //     }
+      //   }, 100))
+      // }
+      // this.pending = false
     },
   },
 })

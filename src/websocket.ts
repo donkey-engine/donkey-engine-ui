@@ -11,6 +11,11 @@ export interface WebSocketInterface {
   deactivate(): void
 }
 
+interface EventMessage {
+  type: 'LOGS' | 'SERVERS'
+  data: any
+}
+
 class Client implements WebSocketInterface {
   public initialized: boolean = false
   public connection?: WebSocket
@@ -48,8 +53,33 @@ class Client implements WebSocketInterface {
     return `${protocol}://${host}/${websocketURI}/${websocketRoom}`
   }
 
+  private async handleLogs(data: EventMessage) {
+    // TODO
+  }
+
+  private async handleServers(data: EventMessage) {
+    store.commit({
+      type: 'setServers',
+      servers: store.state.servers
+            .map(server => {
+              if (server.id === data.data.server_id) {
+                server.status = data.data.status
+              }
+              return server
+            })
+    })
+  }
+
   private async onmessage(event: MessageEvent) {
-    console.log(event)
+    const data: EventMessage = JSON.parse(event.data)
+    switch (data.type) {
+      case 'LOGS':
+        await this.handleLogs(data)
+        break
+      case 'SERVERS':
+        await this.handleServers(data)
+        break
+    }
   }
 
   private async ping() {

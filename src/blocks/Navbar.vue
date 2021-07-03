@@ -81,7 +81,7 @@ import { defineComponent } from 'vue'
 
 import ServerModal from '../components/ServerModal.vue'
 import store from '../store'
-import { getClient, getClient } from '../websocket'
+import { getClient } from '../websocket'
 
 export default defineComponent({
   components: { ServerModal },
