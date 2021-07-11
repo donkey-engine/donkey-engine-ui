@@ -80,6 +80,7 @@ import { defineComponent, PropType } from 'vue'
 
 import { Server, ServerStatus } from '../../interfaces'
 import settings from '../../settings'
+import { getClient } from '../../websocket'
 
 export default defineComponent({
   props: {
@@ -99,18 +100,18 @@ export default defineComponent({
         case ServerStatus.CREATED:
           return {
             text: 'Собрать',
-            callback: (): Promise<void> => this.changeStatus('build', ServerStatus.BUILT)
+            callback: (): Promise<void> => this.changeStatus('build')
           }
         case ServerStatus.BUILT:
         case ServerStatus.STOPPED:
           return {
             text: 'Запустить',
-            callback: (): Promise<void> => this.changeStatus('run', ServerStatus.RUNNING)
+            callback: (): Promise<void> => this.changeStatus('run')
           }
         case ServerStatus.RUNNING:
           return {
             text: 'Остановить',
-            callback: (): Promise<void> => this.changeStatus('stop', ServerStatus.STOPPED)
+            callback: (): Promise<void> => this.changeStatus('stop')
           }
         default:
           throw 'Unhandled status'
@@ -138,18 +139,17 @@ export default defineComponent({
     }
   },
   methods: {
-    async changeStatus(action: string, expectedStatus: ServerStatus) {
-      console.log(action, expectedStatus)
-      // this.pending = true
+    async changeStatus(action: string) {
+      this.pending = true
       await this.$http.post(`/servers/${this.server.id}/${action}/`)
-      // while (this.server.status !== expectedStatus) {
-      //   await new Promise(resolve => setTimeout(async () => {
-      //     if (this.server.status !== expectedStatus) {
-      //       resolve(true)
-      //     }
-      //   }, 100))
-      // }
-      // this.pending = false
+      // TODO https://github.com/donkey-engine/donkey-engine-ui/issues/45
+
+      const wsClient = getClient()
+      wsClient.on('SERVERS', (data) => {
+        if (this.server.id == data.data.server_id) {
+          this.pending = false
+        }
+      })
     },
   },
 })

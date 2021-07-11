@@ -69,7 +69,7 @@ export default defineComponent({
       this.$http.post('/auth/', {username: this.username, password: this.password}).then(response => {
         store.state.user = response.data
         localStorage.setItem('user', JSON.stringify(response.data))
-        getClient().init()
+        getClient().init(this.$http)
         this.$router.push('/dashboard')
       }).catch(error => {
         this.showError = true

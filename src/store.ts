@@ -5,6 +5,7 @@ import { Server } from './interfaces'
 interface User {
     id: number,
     username: string,
+    websocket_room: string,
 }
 
 interface State {

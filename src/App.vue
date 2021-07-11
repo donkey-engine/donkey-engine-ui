@@ -9,7 +9,6 @@ import { defineComponent } from 'vue'
 
 import Footer from './blocks/Footer.vue'
 import Navbar from './blocks/Navbar.vue'
-
 import { getClient } from './websocket'
 import store from './store'
 
@@ -20,7 +19,7 @@ export default defineComponent({
   },
   created() {
     if (store.state.user) {
-      getClient().init()
+      getClient().init(this.$http)
     }
   },
 })
