@@ -2,12 +2,15 @@ import { AxiosStatic } from 'axios'
 
 import store from './store'
 
+export enum EventTypes {
+  LOGS = 'LOGS',
+  SERVERS = 'SERVERS',
+}
+
 interface EventMessage {
   type: EventTypes,
   data: any,
 }
-
-export type EventTypes = 'LOGS' | 'SERVERS'
 
 export type CallbackFn = (data: EventMessage) => void
 
@@ -98,10 +101,10 @@ class Client implements WebSocketInterface {
   private async onmessage(event: MessageEvent) {
     const data: EventMessage = JSON.parse(event.data)
     switch (data.type) {
-      case 'LOGS':
+      case EventTypes.LOGS:
         await this.handleLogs(data)
         break
-      case 'SERVERS':
+      case EventTypes.SERVERS:
         await this.handleServers(data)
         break
     }

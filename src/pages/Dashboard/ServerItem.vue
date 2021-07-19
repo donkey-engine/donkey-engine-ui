@@ -80,7 +80,7 @@ import { defineComponent, PropType } from 'vue'
 
 import { Server, ServerStatus } from '../../interfaces'
 import settings from '../../settings'
-import { getClient } from '../../websocket'
+import { getClient, EventTypes } from '../../websocket'
 
 export default defineComponent({
   props: {
@@ -138,18 +138,19 @@ export default defineComponent({
       }
     }
   },
+  created() {
+    const wsClient = getClient()
+    wsClient.on(EventTypes.SERVERS, (data) => {
+      if (this.server.id == data.data.server_id) {
+        this.pending = false
+      }
+    })
+  },
   methods: {
     async changeStatus(action: string) {
       this.pending = true
       await this.$http.post(`/servers/${this.server.id}/${action}/`)
       // TODO https://github.com/donkey-engine/donkey-engine-ui/issues/45
-
-      const wsClient = getClient()
-      wsClient.on('SERVERS', (data) => {
-        if (this.server.id == data.data.server_id) {
-          this.pending = false
-        }
-      })
     },
   },
 })

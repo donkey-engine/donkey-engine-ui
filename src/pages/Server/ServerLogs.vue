@@ -21,7 +21,7 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
-import { getClient } from '../../websocket'
+import { getClient, EventTypes } from '../../websocket'
 
 export default defineComponent({
   data() {
@@ -37,7 +37,7 @@ export default defineComponent({
 
     const wsClient = getClient()
 
-    wsClient.on('LOGS', (data) => {
+    wsClient.on(EventTypes.LOGS, (data) => {
       if (data.data.server_id == this.$route.params.id && data.data.logs) {
         const logs: String = data.data.logs.trim()
         logs.split('\n').map(logsLine => this.logs.push(logsLine))
