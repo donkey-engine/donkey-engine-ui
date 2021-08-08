@@ -5,3 +5,13 @@
 .section {
   padding: 1.5rem;
 }
+
+#app {
+  min-height: calc(100vh - 3.25rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}

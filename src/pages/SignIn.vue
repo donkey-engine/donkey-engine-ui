@@ -1,8 +1,26 @@
 <template>
   <section class="section">
-    <h1 class="title">Войти в Donkey Engine аккаунт</h1>
-    <p>У вас еще нет аккаунта? <router-link :to="{ path: '/signup' }">Тогда вам сюда!</router-link></p>
-    <div class="container is-fluid box">
+    <div class="container box">
+      <h1 class="title has-text-centered">Войти в Donkey Engine аккаунт</h1>
+      <div>
+        <a
+          class="button is-dark is-fullwidth"
+          href="/api/auth/discord/"
+        >
+          <i class="fab fa-discord fa-lg pr-2" />
+          Войти с помощью Discord
+        </a>
+      </div>
+
+      <div class="already-registered">
+        <span class="already-registered-label has-background-white is-relative pl-2 pr-2">
+          У вас еще нет аккаунта?
+          <router-link :to="{ path: '/signup' }">
+            Тогда вам сюда!
+          </router-link>
+        </span>
+      </div>
+
       <form @submit.prevent="submitForm">
 
         <div v-show="showError" class="notification is-danger is-light">
@@ -97,3 +115,30 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+@media (min-width: 640px) {
+  .box {
+    width: 640px;
+  }
+}
+.already-registered {
+  position: relative;
+  text-align: center;
+  padding: 10px 0;
+}
+.already-registered:after {
+  border: 1px solid #ddd;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  border-radius: 5px;
+}
+.already-registered-label {
+  z-index: 1;
+  display: inline-block;
+  max-width: 75%;
+}
+</style>

@@ -1,6 +1,8 @@
 <template>
   <navbar/>
-  <router-view/>
+  <div class="page-content">
+    <router-view/>
+  </div>
   <Footer />
 </template>
 
