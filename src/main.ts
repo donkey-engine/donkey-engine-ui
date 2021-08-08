@@ -23,7 +23,6 @@ const app = createApp({
         localStorage.removeItem('user')
         store.commit('removeUser')
       }
-      // TODO перенести инициализацию вебсокета сюда
     }
   },
   render() {
