@@ -21,10 +21,12 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
+import { getClient, EventTypes } from '../../websocket'
+
 export default defineComponent({
   data() {
     return {
-      logs: [],
+      logs: [] as String[],
       buildId: 0,
     }
   },
@@ -32,11 +34,15 @@ export default defineComponent({
     const { data } = await this.$http.get(`/servers/${this.$route.params.id}/logs/`)
     this.logs = data.logs.trim().split('\n')
     this.buildId = data.build
-    setTimeout(async () => {
-      const { data } = await this.$http.get(`/servers/${this.$route.params.id}/logs/`)
-      this.logs = data.logs.trim().split('\n')
-      this.buildId = data.build
-    }, 5000)
+
+    const wsClient = getClient()
+
+    wsClient.on(EventTypes.LOGS, (data) => {
+      if (data.data.server_id == this.$route.params.id && data.data.logs) {
+        const logs: String = data.data.logs.trim()
+        logs.split('\n').map(logsLine => this.logs.push(logsLine))
+      }
+    })
   }
 })
 </script>
