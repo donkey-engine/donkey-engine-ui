@@ -69,7 +69,7 @@ class Client implements WebSocketInterface {
 
   private buildURL(websocketRoom: string): string {
     const location = window.location
-    const protocol = location.protocol == 'https' ? 'wss' : 'ws'
+    const protocol = location.protocol == 'https:' ? 'wss' : 'ws'
     const host = location.host
     const websocketURI = 'ws'
     return `${protocol}://${host}/${websocketURI}/${websocketRoom}`
