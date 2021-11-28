@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "echo Did you really think something would be here?"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.0-alpha.16",
