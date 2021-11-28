@@ -1,3 +1,5 @@
+[![CI](https://github.com/donkey-engine/donkey-engine-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/donkey-engine/donkey-engine-ui/actions/workflows/ci.yml)
+
 # donkey-engine-ui
 
 ## Project setup
