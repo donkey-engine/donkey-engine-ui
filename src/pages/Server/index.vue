@@ -34,7 +34,7 @@
           </div>
           <div class="field">
             <button
-              class="button is-danger is-outlined"
+              :class="['button is-danger is-outlined', { 'is-loading': deleting }]"
               @click="deleteServer()"
             >
               <span class="icon">
@@ -67,6 +67,7 @@ export default defineComponent({
   data() {
     return {
       server: null as null | Server,
+      deleting: false,
     }
   },
   computed: {
@@ -101,12 +102,17 @@ export default defineComponent({
   },
   methods: {
     async deleteServer() {
-      await this.$http.delete(`/servers/${this.server?.id}/`)
-      store.commit({
-        type: 'setServers',
-        servers: store.state.servers.filter(server => server.id != this.server?.id)
-      })
-      this.$router.push('/dashboard')
+      this.deleting = true
+      try {
+        await this.$http.delete(`/servers/${this.server?.id}/`)
+        store.commit({
+          type: 'setServers',
+          servers: store.state.servers.filter(server => server.id != this.server?.id)
+        })
+        this.$router.push('/dashboard')
+      } finally {
+        this.deleting = false
+      }
     }
   }
 })
