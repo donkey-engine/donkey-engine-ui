@@ -32,14 +32,17 @@
             <label class="label">{{ name }}</label>
             {{ field }}
           </div>
-          <!-- <div class="field">
-            <button class="button is-danger is-outlined">
+          <div class="field">
+            <button
+              class="button is-danger is-outlined"
+              @click="deleteServer()"
+            >
               <span class="icon">
                 <i class="fas fa-trash-alt" />
               </span>
               <span>Удалить</span>
             </button>
-          </div> -->
+          </div>
         </template>
       </div>
       <div class="column">
@@ -52,6 +55,7 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
+import store from '../../store'
 import { Server, ServerStatus } from '../../interfaces'
 import settings from '../../settings'
 import ServerLogs from './ServerLogs.vue'
@@ -95,5 +99,15 @@ export default defineComponent({
       this.$router.push('/404')
     }
   },
+  methods: {
+    async deleteServer() {
+      await this.$http.delete(`/servers/${this.server?.id}/`)
+      store.commit({
+        type: 'setServers',
+        servers: store.state.servers.filter(server => server.id != this.server?.id)
+      })
+      this.$router.push('/dashboard')
+    }
+  }
 })
 </script>
