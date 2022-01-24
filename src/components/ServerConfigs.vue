@@ -23,6 +23,15 @@
         :required="field.config.required"
       />
     </div>
+    <div v-else-if="field.type == 'password'" class="control">
+      <input
+        class="input"
+        type="text"
+        v-model="config[key]"
+        :name="key"
+        :required="field.config.required"
+      />
+    </div>
     <div v-else-if="field.type == 'number'" class="control">
       <input
         class="input"

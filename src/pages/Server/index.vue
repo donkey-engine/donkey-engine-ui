@@ -29,13 +29,13 @@
           </div>
           <p class="subtitle">Конфигурация</p>
           <div class="field" v-for="(field, name) in server.config" :key="name">
-            <label class="label">{{ name }}</label>
+            <label class="label">{{ gameConfig[name].name }}</label>
             {{ field }}
           </div>
           <div class="field">
             <button
               :class="['button is-danger is-outlined', { 'is-loading': deleting }]"
-              @click="deleteServer()"
+              @click="deleteServer"
             >
               <span class="icon">
                 <i class="fas fa-trash-alt" />
@@ -56,7 +56,7 @@
 import { defineComponent } from 'vue'
 
 import store from '../../store'
-import { Server, ServerStatus } from '../../interfaces'
+import { Server, ServerStatus, GameConfig } from '../../interfaces'
 import settings from '../../settings'
 import ServerLogs from './ServerLogs.vue'
 import ServerRenameForm from './ServerRenameForm.vue'
@@ -67,6 +67,7 @@ export default defineComponent({
   data() {
     return {
       server: null as null | Server,
+      gameConfig: {} as GameConfig,
       deleting: false,
     }
   },
@@ -95,6 +96,8 @@ export default defineComponent({
   async created() {
     try {
       const { data } = await this.$http.get(`/servers/${this.$route.params.id}/`)
+      const { data: gameConfig } = await this.$http.get(`/games/${data.game.id}/config/`)
+      this.gameConfig = gameConfig
       this.server = data
     } catch {
       this.$router.push('/404')
