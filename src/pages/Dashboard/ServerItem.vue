@@ -1,22 +1,20 @@
  <template>
   <div class="column is-4">
     <div class='box'>
-      <div class="content">
-        <div class="columns">
-          <div class="column is-three-quarters">
-            <router-link
-              :to="{ name: 'server', params: { id: server.id } }"
-              class="title has-text-link"
-            >
-              #{{ server.id }} {{ server.name }}
-            </router-link>
-          </div>
-          <div class="column">
-            <span style="width: 100%" :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
-          </div>
+      <div class="content is-relative">
+        <div class="is-flex is-justify-content-space-between is-align-items-center mb-2">
+          <router-link
+            :to="{ name: 'server', params: { id: server.id } }"
+            class="is-size-3 has-text-weight-semibold has-text-link text-truncate"
+            style="line-height: 1;"
+            :title="`#${server.id} ${server.name}`"
+          >
+            #{{ server.id }} {{ server.name }}
+          </router-link>
+          <span :class="['tag', serverStatus.color]">{{ serverStatus.text }}</span>
         </div>
         <div class="field is-horizontal">
-          <div class="field-label is-small">
+          <div class="field-label">
             <label class="label">Игра</label>
           </div>
           <div class="field-body">
@@ -26,7 +24,7 @@
           </div>
         </div>
         <div class="field is-horizontal">
-          <div class="field-label is-small">
+          <div class="field-label">
             <label class="label">Версия</label>
           </div>
           <div class="field-body">
@@ -35,8 +33,8 @@
             </div>
           </div>
         </div>
-        <div class="field is-horizontal">
-          <div class="field-label is-small">
+        <div class="field is-horizontal mb-3">
+          <div class="field-label">
             <label class="label">Плагины</label>
           </div>
           <div class="field-body">
@@ -49,18 +47,24 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="field is-horizontal">
-        <div class="field-label is-small">
-          <label class="label">Адрес</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <p class="control is-small">
-              <input class="input is-small" type="text" v-model="serverAddress" readonly>
-            </p>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">Адрес</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control is-small">
+                <input class="input is-small" type="text" v-model="serverAddress" readonly>
+              </p>
+            </div>
           </div>
         </div>
+        <figure
+          class="is-hidden-desktop-only is-hidden-touch image is-64x64 is-absolute"
+          style="right: 0; top: 50px; margin: 0;"
+        >
+          <img :src="server.game.icon">
+        </figure>
       </div>
       <div class="buttons">
         <button
