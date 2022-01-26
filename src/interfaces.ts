@@ -30,6 +30,8 @@ export interface GameConfig {
 export interface Game {
   id: number
   name: string
+  icon: string
+  description: string
 }
 
 export interface GameVersion {
